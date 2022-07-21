@@ -1,0 +1,258 @@
+﻿<Window x:Class="MathGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MathGame"
+        mc:Ignorable="d"
+        Background="#FF5B02E8"
+        Title="MathGame"  Width="700" Height="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" HorizontalAlignment="Center" VerticalAlignment="Center" Icon="/1.png" >
+    <Grid Background="Black" >
+        <TabControl Background="#FF5B02E8" >
+            <TabItem Header="Числа" Width="100" Background="#FF025FE8" KeyDown="TabItem_KeyDown">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition  Height="Auto" ></RowDefinition>
+                        <RowDefinition  Height="Auto" ></RowDefinition>
+                        <RowDefinition ></RowDefinition>
+                        <RowDefinition Height="Auto" ></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Name="Num1" Margin="10" Padding="10" Width="50" Height="50"  Background="#FF053680"  FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White"/>
+                        <Label Name="sgn1" Margin="10" Padding="10" Width="50" Height="50" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <Label Name="Num2"  Margin="10" Padding="10"  Width="50" Height="50" Background="#FF053680"  FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White"/>
+                        <Label Content="="  Margin="10" Padding="10"   Width="50" Height="50" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox Name="Result" Margin="10" Padding="10" Width="50" Height="50" Background="#FF053680"   FontSize="25" Foreground="White" />
+                    </StackPanel>
+                    <Label Grid.Row="1" Content="Результат" Height="40" HorizontalContentAlignment="Center" FontSize="20" VerticalContentAlignment="Center" />
+                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                        <TextBlock  Name="resultlabel" IsEnabled="False" Padding="10" FontSize="20" Background="#FF5B02E8" TextWrapping="Wrap" Width="Auto" Foreground="White"/>
+                    </ScrollViewer>
+                    <StackPanel Height="60" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" >
+                        <Label Name="TrueCounter" Margin="5" Padding="2" Background="#FFCBFF24"   Width="50"   FontSize="25"/>
+                        <Label Name="FalseCounter" Margin="5" Padding="2" Background="#FFFF3E24"   Width="50"  FontSize="25"/>
+                        <TextBlock Name="timerlbl" Margin="5" Padding="2" Foreground="White" Background="#FF003481"  Width="60" TextAlignment="Center"  FontSize="25"/>
+                        <Button Margin="5" Padding="5" Width="70"  Click="ResetResult" Background="#FF003481">
+                            <TextBlock  Text="Сбросить результат" TextWrapping="WrapWithOverflow" TextAlignment="Center" Foreground="White"/>
+                        </Button>
+                        <Button Margin="5" Padding="5" Width="70"  Click="ResetTimerButton" Foreground="White" Background="#FF003481">
+                            <TextBlock  Text="Сбросить таймер" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                        </Button>
+                        <Button Name="TimerEableButton" Margin="5" Width="70"  Padding="5"  Click="TimerButton" Background="#FF003481" Foreground="White">
+                            <TextBlock  Text="Вкл/выкл таймер" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                        </Button>
+                        <Button Margin="5" Padding="5" Width="70"  Click="ButtonBase_OnClick" Background="#FF003481" Foreground="White">
+                            <TextBlock  Text="Открыть файл" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                        </Button>
+                        <Button Width="70" Margin="5" Padding="5"  Click="ClearClick" Background="#FFCBFF24" Foreground="AliceBlue">
+                            <TextBlock  Text="Очистить файл" TextWrapping="WrapWithOverflow" TextAlignment="Center" Foreground="Black"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Name="WordTab" Header="Слова" Width="100" Background="#FF025FE8">
+                <Grid Name="Grid" Background="#FF5B02E8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition  Height="Auto"></RowDefinition>
+                        <RowDefinition  Height="Auto"></RowDefinition>
+                        <RowDefinition  Height="Auto"></RowDefinition>
+                        <RowDefinition  Height="70"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Button Margin="10" Padding="5" Width="120" Click="GenerateWords" Background="#FF003481">
+                            <TextBlock Text="Запустить таймер" TextWrapping="Wrap" TextAlignment="Center" Foreground="White"/>
+                        </Button>
+                        <Button Name="CheckButton" Margin="10" Padding="5" Width="120" Background="#FF8CB310" Click="CheckWords">
+                            <TextBlock Text="Проверить" TextWrapping="Wrap" TextAlignment="Center" Foreground="White"/>
+                        </Button>
+                        <Button Margin="10" Width="120" Background="#FF003481" Click="ButtonBase_OnClick" >
+                            <TextBlock Text="Открыть файл" Padding="2" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" />
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Margin="10" Width="120" Background="#FFFF3E24" Click="OpenDic" >
+                            <TextBlock Text="Открыть словарь" Padding="2" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" />
+                        </Button>
+                    </StackPanel>
+                    <StackPanel  Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+
+                    </StackPanel>
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                        <TextBox  Margin="10"  Width="100"  Height="50" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Name="Colorizedwords" Header="25" Width="100" Background="#FF025FE8">
+                <StackPanel Background="#FF5B02E8" Orientation="Vertical">
+                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+
+                        <Button Margin="10" Width="120" Background="#FF003481" Click="ButtonBase_OnClick" >
+                            <TextBlock Text="Открыть файл" Padding="2" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" />
+                        </Button>
+                        <Label Name="answelabel" Width="235" Margin="10" Padding="3" FontSize="20" Height="40" />
+                        <Label Name="timerlabel" Width="120" Margin="10" Padding="3" FontSize="20" Height="40" />
+                        <Label Name="BestScore" Content="Лучший: " Width="150" Margin="10" Padding="3" FontSize="20" Height="40" />
+
+
+                    </StackPanel>
+                    <Grid Name="Numbers" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+
+                        </Grid.RowDefinitions>
+                        <StackPanel  Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                            <Button  Width="70"  Height="70" Background="#FF579AFF"  />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                            <Button  Width="70"  Height="70" Background="#FF579AFF" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Name="NumbersTab" Header="Слова" Width="100" Background="#FF025FE8">
+                <StackPanel Background="#FF5B02E8" Orientation="Vertical">
+                    <StackPanel Margin="0,10,0,10" Orientation="Horizontal">
+                        <Button Margin="20, 10,0,10" Width="150" Background="#FF003481" Click="GenerateColorizedWords" >
+                            <TextBlock Text="Сгенерировать слова" Padding="2" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" />
+                        </Button>
+                        <Button Margin="20, 10,0,10" Width="200" Background="#FF003481" Click="StartTimer4" >
+                            <TextBlock Text="Запустить/остановить таймер" Padding="2" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" />
+                        </Button>
+                        <Label Name="Timer4lbl" Margin="20, 10,0,10" Width="100" Background="#FF003481" Foreground="White">
+                        </Label>
+                    </StackPanel>
+                    <Grid  Name="Words">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel  Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                            <Label  Width="100"  Height="50" Background="Black" BorderBrush="White" BorderThickness="1" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
