@@ -350,7 +350,7 @@ namespace MathGame
                     {
                         if (item is TextBox box)
                         {
-                            box.Text = list[rnd.Next(0, 400)];
+                            box.Text = list[rnd.Next(0, list.Length)];
                             textBoxes.Add(box.Text);
 
                             box.TextWrapping = TextWrapping.Wrap;
